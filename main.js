@@ -1,3 +1,23 @@
+var express = require('express')
+// 함수처럼 호출
+var app = express()
+
+// application 이라는 객체를 반환함.
+// route 또는 routing -> 사용자들이 경로마다 반환해줘야하는데 방향을 알려주는 것.
+// app.get('/', (req, res) => {res.send('Hello World!')})
+app.get('/', function(req, res) {
+  return res.send('/');
+});
+
+app.get('/page', function(req, res) {
+  return res.send('page');
+});
+
+app.listen(3000, function() {
+  console.log(`Example app listening on port 3000!`)
+});
+
+/*
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
@@ -141,3 +161,4 @@ var app = http.createServer(function(request,response){
     }
 });
 app.listen(3000);
+*/
