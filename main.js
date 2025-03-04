@@ -5,14 +5,16 @@ var qs = require('querystring');
 var sanitizeHtml = require('sanitize-html');
 
 var express = require('express')
-var bodypasser = require('body-parser');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+var compression = require('compression');
+
 
 // 함수처럼 호출
 var app = express()
 
 // body-parser 가 만들어내는 middelware를 표현한 것임
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(compression());
 
 // application 이라는 객체를 반환함.
 // route 또는 routing -> 사용자들이 경로마다 반환해줘야하는데 방향을 알려주는 것.
