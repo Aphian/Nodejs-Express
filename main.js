@@ -14,6 +14,7 @@ var app = express()
 // body-parser 가 만들어내는 middelware를 표현한 것임
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(compression());
+app.use(express.static('public'));
 
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
@@ -32,7 +33,9 @@ app.get('/', function(request, response) {
   var description = 'Hello, Node.js';
   var list = template.list(request.list);
   var html = template.HTML(title, list,
-    `<h2>${title}</h2>${description}`,
+    `<h2>${title}</h2>${description}
+    <img src="/images/hello.jpg" style="width:250px; display: block; margin-top: 10px;">
+    `,
     `<a href="/create">create</a>`
   );
   response.send(html);
