@@ -17,7 +17,7 @@ app.use(compression());
 
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
-app.use(function(request, response, next){
+app.get('*', function(request, response, next){
   fs.readdir('./data', function(error, filelist){
     request.list = filelist;
     next();
