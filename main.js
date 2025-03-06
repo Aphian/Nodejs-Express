@@ -1,5 +1,4 @@
 var fs = require('fs');
-var template = require('./lib/template.js');
 var indexRouter = require('./routes/index.js');
 var topicRouter = require('./routes/topic.js')
 
@@ -23,11 +22,6 @@ app.get('*', function(request, response, next){
     next();
   });
 });
-
-// application 이라는 객체를 반환함.
-// route 또는 routing -> 사용자들이 경로마다 반환해줘야하는데 방향을 알려주는 것.
-// app.get('/', (req, res) => {res.send('Hello World!')})
-
 
 app.use('/', indexRouter);
 // /topic 시작으로 하는 route 에 topicRouter 라는 middleware 이름 부여
