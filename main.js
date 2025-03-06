@@ -159,7 +159,6 @@ app.use(function(err,request, response, next) {
 });
 
 app.use(function(err, request, response, next){
-  console.error(err.stack);
   response.status(500).send('Something broke!!');
 });
 
