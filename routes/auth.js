@@ -5,6 +5,13 @@ var template = require('../lib/template.js');
 var express = require('express');
 var router = express.Router();
 
+var authData = {
+    // test data
+    email: 'test@a.a.com',
+    password: '111111',
+    nickname: 'test',
+};
+
 router.get('/login', function(request, response){
     var title = 'WEB - Login';
     var list = template.list(request.list);
@@ -19,31 +26,34 @@ router.get('/login', function(request, response){
     `, '');
     response.send(html);
 });
-  
 
-// router.post('/create_process', function(request, response){
-//     /*
-//     var body = '';
-//     request.on('data', function(data){
-//         body = body + data;
-//     });
-//     request.on('end', function(){
-//         var post = qs.parse(body);
-//         var title = post.title;
-//         var description = post.description;
-//         fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-//         response.redirect(`/?id=${title}`);
-//         })
-//     });
-//     */
-//     // body-parser 활용
-//     var post = request.body;
-//     var title = post.title;
-//     var description = post.description;
-//     fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-//         response.redirect(`/topic/${title}`);
-//     });
-// });
+router.post('/login_process', function(request, response){
+    /*
+    var body = '';
+    request.on('data', function(data){
+        body = body + data;
+    });
+    request.on('end', function(){
+        var post = qs.parse(body);
+        var title = post.title;
+        var description = post.description;
+        fs.writeFile(`data/${title}`, description, 'utf8', function(err){
+        response.redirect(`/?id=${title}`);
+        })
+    });
+    */
+    // body-parser 활용
+    var post = request.body;
+    var email = post.email;
+    var password = post.password;
+    if (email === authData.email && password === authData.password) {
+        // success
+        response.send('WelCome!!');
+    } else {
+        response.send('Fail!!');
+    }
+    // response.redirect(`/topic/${title}`);
+});
   
 // router.get('/update/:pageId', function(request, response){
 //     var filteredId = path.parse(request.params.pageId).base;
