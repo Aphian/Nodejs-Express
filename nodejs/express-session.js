@@ -29,5 +29,5 @@ app.get('/', function (req, res, next) {
 })
  
 app.listen(3000, function(){
-    console.log('Express-Seeion!!');
+    console.log('Express-Session!!');
 });
