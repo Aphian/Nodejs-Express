@@ -1,6 +1,7 @@
 var fs = require('fs');
 var indexRouter = require('./routes/index.js');
-var topicRouter = require('./routes/topic.js')
+var topicRouter = require('./routes/topic.js');
+var authRouter = require('./routes/auth.js');
 
 var express = require('express')
 var bodyParser = require('body-parser');
@@ -25,7 +26,9 @@ app.get('*', function(request, response, next){
 
 app.use('/', indexRouter);
 // /topic 시작으로 하는 route 에 topicRouter 라는 middleware 이름 부여
-app.use('/topic',topicRouter)
+app.use('/topic', topicRouter);
+
+app.use('/auth', authRouter);
 
 app.use(function(err,request, response, next) {
   response.status(404).send('Not Found Page!');
