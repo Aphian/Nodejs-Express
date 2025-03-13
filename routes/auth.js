@@ -34,9 +34,13 @@ router.post('/login_process', function(request, response){
     if (email === authData.email && password === authData.password) {
         // success
         // session 에 is_logined 와 nickname 속성을 저장함
+        // 메모리에 저장된 session 정보를 session store 저장하는 작업을 함.
         request.session.is_logined = true;
         request.session.nickname = authData.nickname;
-        response.redirect(`/`);
+        // session 객체애 있는 Data를 session store 에 반영 하는 작업을 바로 시작함
+        request.session.save(function(){
+            response.redirect(`/`);
+        });
     } else {
         response.send('Fail!!');
     }
