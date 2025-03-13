@@ -1,6 +1,7 @@
 var express = require('express')
 var parseurl = require('parseurl')
 var session = require('express-session')
+var FileStore = require('session-file-store')(session);
   
 var app = express()
 
@@ -15,7 +16,9 @@ app.use(session({
 
     // true : session 이 필요하기 전까진 session을 구동하지 않음.
     // false : 필요 유무를 따지지 않고 구동함.
-    saveUninitialized: true
+    saveUninitialized: true,
+
+    store: new FileStore()
 }))
  
 app.get('/', function (req, res, next) {
