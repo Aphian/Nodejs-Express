@@ -28,31 +28,19 @@ router.get('/login', function(request, response){
 });
 
 router.post('/login_process', function(request, response){
-    /*
-    var body = '';
-    request.on('data', function(data){
-        body = body + data;
-    });
-    request.on('end', function(){
-        var post = qs.parse(body);
-        var title = post.title;
-        var description = post.description;
-        fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-        response.redirect(`/?id=${title}`);
-        })
-    });
-    */
-    // body-parser 활용
     var post = request.body;
     var email = post.email;
     var password = post.password;
     if (email === authData.email && password === authData.password) {
         // success
-        response.send('WelCome!!');
+        // session 에 is_logined 와 nickname 속성을 저장함
+        request.session.is_logined = true;
+        request.session.nickname = authData.nickname;
+        response.redirect(`/`);
     } else {
         response.send('Fail!!');
     }
-    // response.redirect(`/topic/${title}`);
+    
 });
   
 // router.get('/update/:pageId', function(request, response){

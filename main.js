@@ -6,6 +6,8 @@ var authRouter = require('./routes/auth.js');
 var express = require('express')
 var bodyParser = require('body-parser');
 var compression = require('compression');
+var session = require('express-session')
+var FileStore = require('session-file-store')(session);
 
 // 함수처럼 호출
 var app = express()
@@ -14,6 +16,12 @@ var app = express()
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(compression());
 app.use(express.static('public'));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  store: new FileStore()
+}))
 
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
