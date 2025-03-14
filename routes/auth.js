@@ -17,11 +17,11 @@ router.get('/login', function(request, response){
     var list = template.list(request.list);
     var html = template.HTML(title, list, `
         <form action="/auth/login_process" method="post">
-        <p><input type="text" name="email" placeholder="email"></p>
-        <p><input type="password" name="password" placeholder="password"></p>
-        <p>
-            <input type="submit" value="Login">
-        </p>
+            <p><input type="text" name="email" placeholder="email"></p>
+            <p><input type="password" name="password" placeholder="password"></p>
+            <p>
+                <input type="submit" value="Login">
+            </p>
         </form>
     `, '');
     response.send(html);
