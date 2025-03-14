@@ -23,6 +23,9 @@ app.use(session({
   store: new FileStore()
 }))
 
+var passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
+
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
 app.get('*', function(request, response, next){
