@@ -26,6 +26,12 @@ app.use(session({
 var passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy;
 
+// passport 전환
+app.post('/auth/login_process', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/login'
+}));
+
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
 app.get('*', function(request, response, next){
