@@ -42,7 +42,6 @@ passport.serializeUser(function(user, done) {
   // session data 안에 user.email 이라는 사용자 식별자가 들어감
   console.log('serializeUser', user);
   done(null, user.email);
-  // done(null, user.id);
 });
 
 // 로그인이 되면 페이지가 방문할 때마다 호출됨
@@ -51,9 +50,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
   console.log('deserializeUser', id);
   done(null, authData);
-  // User.findById(id, function(err, user) {
-  //   done(err, user);
-  // });
 });
 
 passport.use(new LocalStrategy(
@@ -87,7 +83,7 @@ passport.use(new LocalStrategy(
 // passport 전환
 app.post('/auth/login_process', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/auth/login'
+  failureRedirect: '/auth/login',
 }));
 
 // middleware 생성
