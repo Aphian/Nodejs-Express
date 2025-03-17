@@ -40,7 +40,7 @@ app.use(passport.session());
 // serialize 기능 설치
 passport.serializeUser(function(user, done) {
   // session data 안에 user.email 이라는 사용자 식별자가 들어감
-  console.log('serializeUser', user);
+  // console.log('serializeUser', user);
   done(null, user.email);
 });
 
@@ -48,7 +48,7 @@ passport.serializeUser(function(user, done) {
 // 사용자의 실제 데이터를 조회함
 // callback 의 id 값을 DB에서 조회를 함
 passport.deserializeUser(function(id, done) {
-  console.log('deserializeUser', id);
+  // console.log('deserializeUser', id);
   done(null, authData);
 });
 
@@ -61,18 +61,18 @@ passport.use(new LocalStrategy(
   function (username, password, done) {
     console.log(username, password);
     if (username === authData.email) {
-      console.log(1);
+      // console.log(1);
       if (password === authData.password) {
-        console.log(2);
+        // console.log(2);
         return done(null, authData);
       } else {
-        console.log(3);
+        // console.log(3);
         return done(null, false, {
           message: 'Incorrect password.'
         });
       }
     } else {
-      console.log(4);
+      // console.log(4);
       return done (null, false, {
         message: "Incorrect username."
       });

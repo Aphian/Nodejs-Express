@@ -30,6 +30,7 @@ router.get('/login', function(request, response){
 //         // 메모리에 저장된 session 정보를 session store 저장하는 작업을 함.
 //         request.session.is_logined = true;
 //         request.session.nickname = authData.nickname;
+
 //         // session 객체애 있는 Data를 session store 에 반영 하는 작업을 바로 시작함
 //         request.session.save(function(){
 //             response.redirect(`/`);
@@ -39,9 +40,14 @@ router.get('/login', function(request, response){
 //     }
 // });
 
-router.get('/logout', function(request, response){
-    request.session.destroy(function(error){
-        response.redirect('/');
+router.get('/logout', function(request, response, next){
+    request.logout(function(error) {
+        if (error) {
+            return next(error);
+        }
+        request.session.save(function(){
+            response.redirect('/');
+        });
     });
 });
 
