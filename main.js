@@ -36,12 +36,21 @@ var passport = require('passport'),
 app.use(passport.initialize());
 app.use(passport.session());
 
+// session 처리 방법
 // serialize 기능 설치
 passport.serializeUser(function(user, done) {
+  // session data 안에 user.email 이라는 사용자 식별자가 들어감
+  console.log('serializeUser', user);
+  done(null, user.email);
   // done(null, user.id);
 });
 
+// 로그인이 되면 페이지가 방문할 때마다 호출됨
+// 사용자의 실제 데이터를 조회함
+// callback 의 id 값을 DB에서 조회를 함
 passport.deserializeUser(function(id, done) {
+  console.log('deserializeUser', id);
+  done(null, authData);
   // User.findById(id, function(err, user) {
   //   done(err, user);
   // });
