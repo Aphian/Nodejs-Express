@@ -10,6 +10,7 @@ var router = express.Router();
 // app.get('/', (req, res) => {res.send('Hello World!')})
 // app.get --> router 로 분리를 했기 때문에 router.get 으로 변경
 router.get('/', function(request, response) {
+  // passport 를 사용하면 request 객체에 user 라는 속성을 갖도로 해줌.
   // console.log('/', request.user);
   var title = 'Welcome';
   var description = 'Hello, Node.js';
