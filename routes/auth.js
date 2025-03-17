@@ -5,13 +5,6 @@ var template = require('../lib/template.js');
 var express = require('express');
 var router = express.Router();
 
-var authData = {
-    // test data
-    email: 'test@a.a.com',
-    password: '111111',
-    nickname: 'test',
-};
-
 router.get('/login', function(request, response){
     var title = 'WEB - Login';
     var list = template.list(request.list);
