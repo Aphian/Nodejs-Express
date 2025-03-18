@@ -41,7 +41,7 @@ app.use(passport.session());
 app.use(flash());
 app.get('/flash', function(request, response) {
   // session store 에 저장이 되는 값들.
-  request.flash('info', 'Flash is back!');
+  request.flash('msg', 'Flash is back!');
   response.send('flash');
 });
 
@@ -99,6 +99,8 @@ passport.use(new LocalStrategy(
 app.post('/auth/login_process', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
+  failureFlash: true,
+  successFlash: true,
 }));
 
 // middleware 생성
