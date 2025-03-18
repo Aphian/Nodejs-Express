@@ -21,17 +21,6 @@ app.use(session({
 }))
 
 app.use(flash());
-app.get('/flash', function(request, response) {
-  // session store 에 저장이 되는 값들.
-  request.flash('msg', 'Flash is back!');
-  response.send('flash');
-});
-
-app.get('/flash-display', function(request, response) {
-  var fmsg = request.flash();
-  console.log(fmsg);
-  response.send(fmsg);
-});
 
 var passport = require('./lib/passport.js')(app);
 
