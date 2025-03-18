@@ -9,6 +9,8 @@ var compression = require('compression');
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
 
+var flash = require('connect-flash');
+
 // 함수처럼 호출
 var app = express()
 
@@ -35,6 +37,19 @@ var passport = require('passport'),
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
+app.get('/flash', function(request, response) {
+  // session store 에 저장이 되는 값들.
+  request.flash('info', 'Flash is back!');
+  response.send('flash');
+});
+
+app.get('/flash-display', function(request, response) {
+  var fmsg = request.flash();
+  console.log(fmsg);
+  response.send(fmsg);
+});
 
 // session 처리 방법
 // serialize 기능 설치
