@@ -1,8 +1,4 @@
 var fs = require('fs');
-var indexRouter = require('./routes/index.js');
-var topicRouter = require('./routes/topic.js');
-var authRouter = require('./routes/auth.js');
-
 var express = require('express')
 var bodyParser = require('body-parser');
 var compression = require('compression');
@@ -11,7 +7,7 @@ var FileStore = require('session-file-store')(session);
 var flash = require('connect-flash');
 
 // 함수처럼 호출
-var app = express()
+var app = express();
 
 // body-parser 가 만들어내는 middelware를 표현한 것임
 app.use(bodyParser.urlencoded({extended: false}));
@@ -39,14 +35,6 @@ app.get('/flash-display', function(request, response) {
 
 var passport = require('./lib/passport.js')(app);
 
-// passport 전환
-app.post('/auth/login_process', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/auth/login',
-  failureFlash: true,
-  successFlash: true,
-}));
-
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
 app.get('*', function(request, response, next){
@@ -55,6 +43,10 @@ app.get('*', function(request, response, next){
     next();
   });
 });
+
+var indexRouter = require('./routes/index.js');
+var topicRouter = require('./routes/topic.js');
+var authRouter = require('./routes/auth.js')(passport);
 
 app.use('/', indexRouter);
 // /topic 시작으로 하는 route 에 topicRouter 라는 middleware 이름 부여
