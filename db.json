@@ -1,9 +1,15 @@
 {
-    "users": [
-        {
-            "email": "test@b.b.com",
-            "password": "111111",
-            "displayName": "tester"
-        }
-    ]
+  "users": [
+    {
+      "email": "test@b.b.com",
+      "password": "111111",
+      "displayName": "tester"
+    },
+    {
+      "id": "BerjRcT5J",
+      "email": "test@b.b.com",
+      "password": "222222",
+      "displayName": "tester2"
+    }
+  ]
 }
