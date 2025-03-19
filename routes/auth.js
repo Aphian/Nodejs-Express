@@ -1,9 +1,9 @@
 var fs = require('fs');
 var path = require('path');
-var sanitizeHtml = require('sanitize-html');
-var template = require('../lib/template.js');
 var express = require('express');
 var router = express.Router();
+var sanitizeHtml = require('sanitize-html');
+var template = require('../lib/template.js');
 
 module.exports = function(passport) {
     router.get('/login', function(request, response){
@@ -53,7 +53,7 @@ module.exports = function(passport) {
       successRedirect: '/',
       failureRedirect: '/auth/login',
       failureFlash: true,
-      successFlash: true,
+      successFlash: true
     }));
     
     router.get('/logout', function(request, response, next){

@@ -1,4 +1,3 @@
-var session = require('express-session');
 var template = require('../lib/template.js');
 var auth = require('../lib/auth.js');
 
