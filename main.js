@@ -6,6 +6,9 @@ var session = require('express-session')
 var FileStore = require('session-file-store')(session);
 var flash = require('connect-flash');
 
+var helmet = require('helmet');
+app.use(helmet());
+
 // 함수처럼 호출
 var app = express();
 
