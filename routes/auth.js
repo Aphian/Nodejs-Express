@@ -5,6 +5,12 @@ var router = express.Router();
 var sanitizeHtml = require('sanitize-html');
 var template = require('../lib/template.js');
 
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('db.json');
+var db = low(adapter);
+db.defaults({users: []}).write();
+
 module.exports = function(passport) {
     router.get('/login', function(request, response){
         var fmsg = request.flash();
@@ -68,16 +74,30 @@ module.exports = function(passport) {
         var html = template.HTML(title, list, `
             <div style="color: red;">${feedback}</div>
             <form action="/auth/register_process" method="post">
-                <p><input type="text" name="email" placeholder="email"></p>
-                <p><input type="password" name="password" placeholder="password"></p>
-                <p><input type="password" name="password2" placeholder="password2"></p>
-                <p><input type="text" name="displayName" placeholder="displayName"</p>
+                <p><input type="text" name="email" placeholder="email" value="test@b.b.com"></p>
+                <p><input type="password" name="password" placeholder="password" value="111111"></p>
+                <p><input type="password" name="password2" placeholder="password2" value="111111"></p>
+                <p><input type="text" name="displayName" placeholder="displayName" value="tester"></p>
                 <p>
                     <input type="submit" value="Join">
                 </p>
             </form>
         `, '');
         response.send(html);
+    });
+
+    router.post('/register_process', function(request, response){
+        var post = request.body;
+        var email = post.email;
+        var password = post.password;
+        var password2 = post.password2;
+        var displayName = post.displayName;
+        db.get('users').push({
+            email: email,
+            password: password,
+            displayName: displayName,
+        }).write();
+        response.redirect('/');
     });
 
     router.get('/logout', function(request, response, next){
