@@ -18,7 +18,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new FileStore()
-}))
+}));
 
 app.use(flash());
 

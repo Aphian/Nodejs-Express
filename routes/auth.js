@@ -12,7 +12,7 @@ module.exports = function(passport) {
         if (fmsg.error) {
             feedback = fmsg.error[0];
         }
-    
+
         var title = 'WEB - Login';
         var list = template.list(request.list);
         var html = template.HTML(title, list, `
@@ -27,35 +27,35 @@ module.exports = function(passport) {
         `, '');
         response.send(html);
     });
-    // passport 형식으로 변환 필요
-    // router.post('/login_process', function(request, response){
-    //     var post = request.body;
-    //     var email = post.email;
-    //     var password = post.password;
-    //     if (email === authData.email && password === authData.password) {
-    //         // success
-    //         // session 에 is_logined 와 nickname 속성을 저장함
-    //         // 메모리에 저장된 session 정보를 session store 저장하는 작업을 함.
-    //         request.session.is_logined = true;
-    //         request.session.nickname = authData.nickname;
-    
-    //         // session 객체애 있는 Data를 session store 에 반영 하는 작업을 바로 시작함
-    //         request.session.save(function(){
-    //             response.redirect(`/`);
-    //         });
-    //     } else {
-    //         response.send('Fail!!');
-    //     }
-    // });
-    
+// passport 형식으로 변환 필요
+// router.post('/login_process', function(request, response){
+//     var post = request.body;
+//     var email = post.email;
+//     var password = post.password;
+//     if (email === authData.email && password === authData.password) {
+//         // success
+//         // session 에 is_logined 와 nickname 속성을 저장함
+//         // 메모리에 저장된 session 정보를 session store 저장하는 작업을 함.
+//         request.session.is_logined = true;
+//         request.session.nickname = authData.nickname;
+
+//         // session 객체애 있는 Data를 session store 에 반영 하는 작업을 바로 시작함
+//         request.session.save(function(){
+//             response.redirect(`/`);
+//         });
+//     } else {
+//         response.send('Fail!!');
+//     }
+// });
+
     // passport 전환
-    router.post('/login_process', passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/auth/login',
-      failureFlash: true,
-      successFlash: true
+    router.post('/login_process', passport.authenticate('local', {        
+        successRedirect: '/',
+        failureRedirect: '/auth/login',
+        failureFlash: true,
+        successFlash: true
     }));
-    
+
     router.get('/logout', function(request, response, next){
         request.logout(function(error) {
             if (error) {
