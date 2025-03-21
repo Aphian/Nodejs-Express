@@ -6,6 +6,8 @@ var sanitizeHtml = require('sanitize-html');
 var template = require('../lib/template.js');
 var shortid = require('shortid');
 
+var bcrypt = require('bcrypt');
+
 var db = require('../lib/db.js');
 
 module.exports = function(passport) {
@@ -93,15 +95,17 @@ module.exports = function(passport) {
             request.flash('error', 'Password must Same!!');
             response.redirect('/auth/register');
         } else {
-            var user = {
-                id: shortid.generate(),
-                email: email,
-                password: password,
-                displayName: displayName,
-            }
-            db.get('users').push().write();
-            request.login(user, function(error){
-                return response.redirect('/');
+            bcrypt.hash(password, 10, function(err, hash) {
+                var user = {
+                    id: shortid.generate(),
+                    email: email,
+                    password: hash,
+                    displayName: displayName,
+                };
+                db.get('users').push().write();
+                request.login(user, function(error){
+                    return response.redirect('/');
+                });
             });
         }
     });
