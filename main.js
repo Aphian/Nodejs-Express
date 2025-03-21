@@ -6,6 +6,8 @@ var session = require('express-session')
 var FileStore = require('session-file-store')(session);
 var flash = require('connect-flash');
 
+var db = require('./lib/db.js');
+
 var helmet = require('helmet');
 app.use(helmet());
 
@@ -30,10 +32,12 @@ var passport = require('./lib/passport.js')(app);
 // middleware 생성
 // next 호출되어야 할 middleware 가 담겨있음.
 app.get('*', function(request, response, next){
-  fs.readdir('./data', function(error, filelist){
-    request.list = filelist;
-    next();
-  });
+  request.list = db.get('topics').value();
+  next();
+  // fs.readdir('./data', function(error, filelist){
+  //   request.list = filelist;
+  //   next();
+  // });
 });
 
 var indexRouter = require('./routes/index.js');
