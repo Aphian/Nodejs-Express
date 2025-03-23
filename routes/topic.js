@@ -61,7 +61,7 @@ router.post('/create_process', function(request, response){
         id: id,
         title: title,
         description: description,
-        user_id: request.user_id,
+        user_id: request.user.id,
     }).write();
     response.redirect(`/topic/${id}`);
 });
@@ -72,7 +72,7 @@ router.get('/update/:pageId', function(request, response){
         return false;
     }
     var topic = db.get('topics').find({id: request.params.pageId}).value();
-    if (topic.user_id !== request.user_id) {
+    if (topic.user_id !== request.user.id) {
         request.flash('error', 'Not yours!');
         return response.redirect('/');
     }
@@ -108,7 +108,7 @@ router.post('/update_process', function(request, response){
     var title = post.title;
     var description = post.description;
     var topic = db.get('topics').find({id: id}).value();
-    if (topic.user_id !== request.user_id) {
+    if (topic.user_id !== request.user.id) {
         request.flash('error', 'Not yours!');
         return response.redirect('/');
     }
@@ -132,7 +132,7 @@ router.post('/delete_process', function(request, response){
     var post = request.body;
     var id = post.id;
     var topic = db.get('topics').find({id: id}).value();
-    if (topic.user_id !== request.user_id) {
+    if (topic.user_id !== request.user.id) {
         request.flash('error', 'Not yours!');
         return response.redirect('/');
     }
@@ -145,7 +145,7 @@ router.post('/delete_process', function(request, response){
 });
   
 router.get('/:pageId', function(request, response, next) {
-    var topic = db.get('topics').find({id: request.params.pageid}).value();
+    var topic = db.get('topics').find({id: request.params.pageId}).value();
     var user = db.get('users').find({id: topic.user_id}).value();
     // var filteredId = path.parse(request.params.pageId).base;
     var sanitizedTitle = sanitizeHtml(topic.title);

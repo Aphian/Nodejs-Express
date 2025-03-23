@@ -73,10 +73,10 @@ module.exports = function(passport) {
         var html = template.HTML(title, list, `
             <div style="color: red;">${feedback}</div>
             <form action="/auth/register_process" method="post">
-                <p><input type="text" name="email" placeholder="email" value="test@b.b.com"></p>
-                <p><input type="password" name="password" placeholder="password" value="111111"></p>
-                <p><input type="password" name="password2" placeholder="password2" value="111111"></p>
-                <p><input type="text" name="displayName" placeholder="displayName" value="tester"></p>
+                <p><input type="text" name="email" placeholder="email"></p>
+                <p><input type="password" name="password" placeholder="password"></p>
+                <p><input type="password" name="password2" placeholder="password2"></p>
+                <p><input type="text" name="displayName" placeholder="display Name"></p>
                 <p>
                     <input type="submit" value="Join">
                 </p>
@@ -102,7 +102,7 @@ module.exports = function(passport) {
                     password: hash,
                     displayName: displayName,
                 };
-                db.get('users').push().write();
+                db.get('users').push(user).write();
                 request.login(user, function(error){
                     return response.redirect('/');
                 });

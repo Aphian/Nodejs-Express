@@ -1,5 +1,24 @@
 {
   "users": [
-
+    {
+      "id": "AZGFe8Old",
+      "email": "test@a.a.com",
+      "password": "$2b$10$wkKNeMI2LfvwlUK6HLPe7ubCN6SahM49SYyJHQwVOqPVmylUhMSi2",
+      "displayName": "tester"
+    },
+    {
+      "id": "Dj5eFbsm-",
+      "email": "test2@b.b.com",
+      "password": "$2b$10$GArVHC.892MzUQ9n0ipLke4DarK5n5fV/TSXV/RlugLXvgeL2opU2",
+      "displayName": "tester22"
+    }
+  ],
+  "topics": [
+    {
+      "id": "hite78MV4",
+      "title": "Router",
+      "description": "Router is ...",
+      "user_id": "AZGFe8Old"
+    }
   ]
 }

@@ -9,10 +9,10 @@ var flash = require('connect-flash');
 var db = require('./lib/db.js');
 
 var helmet = require('helmet');
-app.use(helmet());
 
 // 함수처럼 호출
 var app = express();
+app.use(helmet());
 
 // body-parser 가 만들어내는 middelware를 표현한 것임
 app.use(bodyParser.urlencoded({extended: false}));
